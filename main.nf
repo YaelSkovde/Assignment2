@@ -14,8 +14,8 @@ process calculate_gc_content {
 
     // Define inputs
     input:
-    path fasta_file from file(params.inputFile)
-    val gc_cutoff from params.cutoff
+    path fasta_file 
+    val gc_cutoff 
 
     // Define outputs
     output:
