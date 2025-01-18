@@ -3,9 +3,9 @@
 nextflow.enable.dsl=2
 
 // Define input parameters
-params.inputFile = '/data/volume/bacterial_dna.fasta' // Path to the input FASTA file in the mounted volume
-params.cutoff = 0.5 // Default GC content cutoff
-params.outputDir = '/data/volume' // Path to the output directory in the mounted volume
+params.inputFile = params.inputFile ?: 'bacterial_dna.fasta' // Default input file path if not provided
+params.cutoff = params.cutoff ?: 0.5 // Default GC content cutoff if not provided
+params.outputDir = params.outputDir ?: 'results' // Default output directory if not provided
 
 // Process to calculate GC content
 process calculate_gc_content {
@@ -14,8 +14,8 @@ process calculate_gc_content {
 
     // Define inputs
     input:
-    path fasta_file 
-    val gc_cutoff 
+    path fasta_file from file(params.inputFile)
+    val gc_cutoff from params.cutoff
 
     // Define outputs
     output:
